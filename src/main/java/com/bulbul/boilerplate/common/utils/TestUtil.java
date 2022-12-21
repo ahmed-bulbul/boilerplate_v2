@@ -34,7 +34,7 @@ public class TestUtil {
 
         dateList.forEach(item ->{
             if(item.equals(ON_COND) || item.equals(N_A)){
-                //set to as String field
+                //set to as String field type
                 return;
             }else{
                 return;
