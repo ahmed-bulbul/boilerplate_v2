@@ -24,9 +24,12 @@ public abstract class AbstractDomainBasedEntity implements AbstractEntity {
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
+    @Column(updatable = false)
+    private String createdBy;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    private String updatedBy;
 
     @Column(name = "is_active", columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean isActive = ApplicationConstant.STATUS_TRUE;
