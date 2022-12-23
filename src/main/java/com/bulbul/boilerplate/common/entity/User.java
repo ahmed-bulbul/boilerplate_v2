@@ -6,9 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,12 +15,16 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "users")
 public class User extends AbstractDomainBasedEntity {
 
     @NotBlank
     @Size(max = 20)
-    private String login;
+    private String username;
+
+    private String email;
 
     @NotBlank
     @Size(max = 120)
@@ -44,9 +47,15 @@ public class User extends AbstractDomainBasedEntity {
 //    private Long employeeId;
 
 
-    public User(String login, String password) {
-        this.login = login;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String email, String encode) {
+        this.username = username;
+        this.email = email;
+        this.password = encode;
     }
 
     @JsonIgnore

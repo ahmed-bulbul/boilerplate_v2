@@ -5,6 +5,7 @@ import com.bulbul.boilerplate.common.generic.repository.AbstractRepository;
 import com.bulbul.boilerplate.common.generic.service.AbstractSearchService;
 import com.bulbul.boilerplate.common.generic.specification.CustomSpecification;
 import com.bulbul.boilerplate.common.payload.request.RoleDto;
+import com.bulbul.boilerplate.common.payload.response.RoleViewModel;
 import com.bulbul.boilerplate.common.payload.search.RoleSearchDto;
 import com.bulbul.boilerplate.common.service.RoleService;
 import org.springframework.data.jpa.domain.Specification;
@@ -29,17 +30,26 @@ public class RoleServiceImpl extends AbstractSearchService<Role, RoleDto, RoleSe
     }
 
     @Override
-    protected <T> T convertToResponseDto(Role role) {
-        return null;
+    protected RoleViewModel convertToResponseDto(Role role) {
+        return RoleViewModel.builder()
+                .name(role.getName())
+                .description(role.getDescription())
+                .isActive(role.getIsActive())
+                .build();
     }
 
     @Override
     protected Role convertToEntity(RoleDto roleDto) {
-        return null;
+        return Role.builder().
+                name(roleDto.getName()).
+                description(roleDto.getDescription()).
+                build();
     }
 
     @Override
     protected Role updateEntity(RoleDto dto, Role entity) {
-        return null;
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        return entity;
     }
 }

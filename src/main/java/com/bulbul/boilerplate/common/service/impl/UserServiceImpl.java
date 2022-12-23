@@ -29,6 +29,7 @@ public class UserServiceImpl extends AbstractSearchService<User, UserDto, UserSe
 
     @Override
     protected User convertToEntity(UserDto userDto) {
+
         return null;
     }
 
