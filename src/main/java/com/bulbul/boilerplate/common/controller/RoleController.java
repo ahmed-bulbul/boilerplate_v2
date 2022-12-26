@@ -2,7 +2,6 @@ package com.bulbul.boilerplate.common.controller;
 
 
 import com.bulbul.boilerplate.common.entity.Role;
-import com.bulbul.boilerplate.common.entity.User;
 import com.bulbul.boilerplate.common.generic.controller.AbstractSearchController;
 import com.bulbul.boilerplate.common.generic.service.ISearchService;
 import com.bulbul.boilerplate.common.payload.request.RoleDto;

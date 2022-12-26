@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestUtil {
     private static final String ON_COND = "ON_COND";
@@ -31,6 +33,26 @@ public class TestUtil {
         System.out.println(localDate);  //default, print ISO_LOCAL_DATE
 
         System.out.println(formatter.format(localDate)); // print formatted date
+
+        System.out.println(checkDate("dare"));
+
+    }
+
+
+    public static boolean checkDate(String data){
+        String text = "10-12-33"; //ON COND
+        if(text.contains("MAR") ){
+            System.out.println("MATCHES...........");
+        }
+        //split -
+        text = text.replaceAll("[-/]*", "");
+        if(text.matches("[0-9]+")){
+            System.out.println("only digit.......");
+        }
+
+        System.out.println(text);
+
+        return true;
     }
 
     private static String convertToDate(String shelfDate) {
