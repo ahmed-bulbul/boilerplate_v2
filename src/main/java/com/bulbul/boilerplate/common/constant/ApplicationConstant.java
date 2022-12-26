@@ -79,7 +79,16 @@ public class ApplicationConstant {
     public static String ROLE_ADMIN = "ROLE_ADMIN";
     public static String ROLE_USER = "ROLE_USER";
 
+
     public static final String NUMBER_INVALID = "edcm1002";
     public static final String ENTITY_CODE = "code";
 
+
+    /**
+     * Builder Constant
+     *
+     * */
+    public static final String ROLE_SUPER_ADMIN_DESCRIPTION = "Role Super Admin";
+    public static final String ROLE_USER_DESCRIPTION = "Role User";
+    public static final String CREATED_BY_SYSTEM = "System";
 }

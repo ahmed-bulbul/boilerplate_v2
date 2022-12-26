@@ -1,15 +1,26 @@
 package com.bulbul.boilerplate.common.utils.builder;
 
+import com.bulbul.boilerplate.common.constant.ApplicationConstant;
 import com.bulbul.boilerplate.common.constant.ERole;
 import com.bulbul.boilerplate.common.entity.Role;
 import com.bulbul.boilerplate.common.repository.RoleRepository;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Role Builder
+ * @author bulbulahmed
+ * */
 
 @Component
 public class RoleBuilder {
+
+    /**
+     * Autowired Constructor
+     *
+     */
 
     private final RoleRepository roleRepository;
 
@@ -17,22 +28,24 @@ public class RoleBuilder {
         this.roleRepository = roleRepository;
     }
 
-    //create role
+    /**
+     * create system generated role when apps running for first time without data on database
+     * */
     public void createRole(){
 
         List<Role> roleList = new ArrayList<>();
         //create SUPER_ADMIN
         Role roleSA = new Role();
         roleSA.setName(ERole.ROLE_SUPER_ADMIN);
-        roleSA.setDescription(BuilderConstant.ROLE_SUPER_ADMIN_DESC);
-        roleSA.setCreatedBy(BuilderConstant.CREATED_BY_SYSTEM);
+        roleSA.setDescription(ApplicationConstant.ROLE_SUPER_ADMIN_DESCRIPTION);
+        roleSA.setCreatedBy(ApplicationConstant.CREATED_BY_SYSTEM);
         roleList.add(roleSA);
 
         //create USER
         Role roleUSR= new Role();
-        roleUSR.setName(ERole.ROLE_SUPER_ADMIN);
-        roleUSR.setDescription(BuilderConstant.ROLE_USER_DESC);
-        roleUSR.setCreatedBy(BuilderConstant.CREATED_BY_SYSTEM);
+        roleUSR.setName(ERole.ROLE_USER);
+        roleUSR.setDescription(ApplicationConstant.ROLE_USER_DESCRIPTION);
+        roleUSR.setCreatedBy(ApplicationConstant.CREATED_BY_SYSTEM);
         roleList.add(roleUSR);
 
         //save all
