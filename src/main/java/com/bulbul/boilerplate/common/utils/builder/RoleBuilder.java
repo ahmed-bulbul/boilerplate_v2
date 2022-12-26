@@ -3,9 +3,9 @@ package com.bulbul.boilerplate.common.utils.builder;
 import com.bulbul.boilerplate.common.constant.ApplicationConstant;
 import com.bulbul.boilerplate.common.constant.ERole;
 import com.bulbul.boilerplate.common.entity.Role;
-import com.bulbul.boilerplate.common.generic.service.ISearchService;
 import com.bulbul.boilerplate.common.repository.RoleRepository;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
