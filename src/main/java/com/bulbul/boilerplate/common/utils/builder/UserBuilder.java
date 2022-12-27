@@ -29,12 +29,12 @@ public class UserBuilder {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncrypt encrypt;
 
-    public UserBuilder(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserBuilder(UserRepository userRepository, RoleRepository roleRepository, PasswordEncrypt encrypt) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.encrypt = encrypt;
     }
 
     public List<Role> getRoles(){
@@ -51,7 +51,7 @@ public class UserBuilder {
         if(Boolean.FALSE.equals(userRepository.existsByUsername(username))){
             User user = new User();
             user.setUsername(username);
-            user.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
+            user.setPassword(encrypt.encryptPassword(DEFAULT_PASSWORD));
             user.setEmail(email);
             user.setRoles(
                     getRoles().stream()
