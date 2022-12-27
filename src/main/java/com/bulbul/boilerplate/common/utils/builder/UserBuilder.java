@@ -8,10 +8,13 @@ import com.bulbul.boilerplate.common.repository.RoleRepository;
 import com.bulbul.boilerplate.common.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
+
+/**
+ * UserBuilder
+ * @author bulbulahmed
+ * */
 
 @Component
 public class UserBuilder {
@@ -32,19 +35,22 @@ public class UserBuilder {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Set<Role> getRoles(){
-        return roleRepository
+    public List<Role> getRoles(){
+        return roleRepository.findAll();
     }
 
     //create user
     public void createUser(){
         User user = new User();
-        user.setUsername("user");
-        user.setPassword(passwordEncoder.encode("123456"));
-        user.setEmail("user@user.com");
-//        user.setRoles(
-//                getRoles().get(0)
-//        );
+        user.setUsername(BuilderConstant.USERNAME);
+        user.setPassword(passwordEncoder.encode(BuilderConstant.DEFAULT_PASSWORD));
+        user.setEmail(BuilderConstant.USER_EMAIL);
+        user.setRoles(
+                getRoles().stream()
+                        .filter(role-> role.getName().equals(ApplicationConstant.ROLE_USER))
+                        .collect(Collectors.toSet())
+        );
+        userRepository.save(user);
 
     }
 }

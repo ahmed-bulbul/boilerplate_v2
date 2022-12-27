@@ -12,20 +12,23 @@ import org.springframework.stereotype.Component;
 public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     private final RoleBuilder roleBuilder;
+    private final UserBuilder userBuilder;
 
     @Autowired
     PasswordEncoder bCryptPasswordEncoder;
 
-    private static final String DEFAULT_PASSWORD="123456";
 
-    public CommandLineAppStartupRunner(RoleBuilder roleBuilder) {
+    public CommandLineAppStartupRunner(RoleBuilder roleBuilder, UserBuilder userBuilder) {
         this.roleBuilder = roleBuilder;
+        this.userBuilder = userBuilder;
     }
 
     @Override
     public void run(String... args) {
         log.info("=========CommandLineAppStartupRunner===============");
-        log.info(bCryptPasswordEncoder.encode(DEFAULT_PASSWORD));
+        log.info(bCryptPasswordEncoder.encode(BuilderConstant.DEFAULT_PASSWORD));
         this.roleBuilder.createRole();
+        this.userBuilder.createUser();
+
     }
 }
