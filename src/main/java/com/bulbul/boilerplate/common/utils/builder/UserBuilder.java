@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.bulbul.boilerplate.common.utils.builder.BuilderConstant.*;
+
 /**
  * UserBuilder
  * @author bulbulahmed
@@ -41,16 +43,27 @@ public class UserBuilder {
 
     //create user
     public void createUser(){
-        User user = new User();
-        user.setUsername(BuilderConstant.USERNAME);
-        user.setPassword(passwordEncoder.encode(BuilderConstant.DEFAULT_PASSWORD));
-        user.setEmail(BuilderConstant.USER_EMAIL);
-        user.setRoles(
-                getRoles().stream()
-                        .filter(role-> role.getName().equals(ApplicationConstant.ROLE_USER))
-                        .collect(Collectors.toSet())
-        );
-        userRepository.save(user);
+        create(USER_USERNAME, USER_EMAIL);
+        create(ADMIN_USERNAME, ADMIN_EMAIL);
+    }
 
+    private void create(String username, String email) {
+        if(Boolean.FALSE.equals(userRepository.existsByUsername(username))){
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
+            user.setEmail(email);
+            user.setRoles(
+                    getRoles().stream()
+                            .filter(UserBuilder::isRoleUser)
+                            .collect(Collectors.toSet())
+            );
+            userRepository.save(user);
+        }
+    }
+
+
+    private static boolean isRoleUser(Role role) {
+        return role.getName().toString().equals(ApplicationConstant.ROLE_USER);
     }
 }
