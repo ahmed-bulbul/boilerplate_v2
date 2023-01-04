@@ -3,7 +3,6 @@ package com.bulbul.boilerplate.common.entity;
 
 import com.bulbul.boilerplate.common.constant.ERole;
 import com.bulbul.boilerplate.common.generic.entity.AbstractDomainBasedEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,10 +25,10 @@ public class Role extends AbstractDomainBasedEntity {
     private String description;
 
     private Boolean isDeleted = false;
-    @JsonIgnore
-    @OneToMany(mappedBy = "role", cascade = {CascadeType.MERGE, CascadeType.PERSIST},
-            orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<User> userSet;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "role", cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+//            orphanRemoval = true, fetch = FetchType.LAZY)
+//    private Set<User> userSet;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
@@ -49,15 +48,15 @@ public class Role extends AbstractDomainBasedEntity {
         }
     }
 
-    public void addUser(User user) {
-        if (userSet == null) {
-            userSet = new HashSet<>();
-        }
-        if (!userSet.contains(user)) {
-            userSet.add(user);
-            user.setRoles(user.getRoles());
-        }
-    }
+//    public void addUser(User user) {
+//        if (userSet == null) {
+//            userSet = new HashSet<>();
+//        }
+//        if (!userSet.contains(user)) {
+//            userSet.add(user);
+//            user.setRoles(user.getRoles());
+//        }
+//    }
 
 
     @Override

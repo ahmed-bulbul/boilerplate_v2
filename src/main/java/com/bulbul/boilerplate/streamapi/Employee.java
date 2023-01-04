@@ -1,4 +1,4 @@
-package com.bulbul.boilerplate;
+package com.bulbul.boilerplate.streamapi;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private Double salary;
+    private String title;
     private List<String> projects;
 
     @Override
@@ -15,14 +16,16 @@ public class Employee {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", salary=" + salary +
+                ", title=" + title +
                 ", projects=" + projects +
                 '}';
     }
 
-    public Employee(String firstName, String lastName, Double salary, List<String> projects) {
+    public Employee(String firstName, String lastName, Double salary,String title, List<String> projects) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
+        this.title=title;
         this.projects = projects;
     }
 
@@ -61,4 +64,11 @@ public class Employee {
         this.projects = projects;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

@@ -1,5 +1,6 @@
 package com.bulbul.boilerplate.common.utils.builder;
 
+import com.bulbul.boilerplate.streamapi.seed.StreamApiSeeder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,13 +15,16 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     private final RoleBuilder roleBuilder;
     private final UserBuilder userBuilder;
 
+    private final StreamApiSeeder streamApiSeeder;
+
     @Autowired
     PasswordEncoder bCryptPasswordEncoder;
 
 
-    public CommandLineAppStartupRunner(RoleBuilder roleBuilder, UserBuilder userBuilder) {
+    public CommandLineAppStartupRunner(RoleBuilder roleBuilder, UserBuilder userBuilder, StreamApiSeeder streamApiSeeder) {
         this.roleBuilder = roleBuilder;
         this.userBuilder = userBuilder;
+        this.streamApiSeeder = streamApiSeeder;
     }
 
     @Override
@@ -29,6 +33,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         log.info(bCryptPasswordEncoder.encode(BuilderConstant.DEFAULT_PASSWORD));
         this.roleBuilder.createRole();
         this.userBuilder.createUser();
+        this.streamApiSeeder.create();
 
     }
 }
