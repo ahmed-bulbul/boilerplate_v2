@@ -33,7 +33,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         log.info(bCryptPasswordEncoder.encode(BuilderConstant.DEFAULT_PASSWORD));
         this.roleBuilder.createRole();
         this.userBuilder.createUser();
-        this.streamApiSeeder.create();
+        this.streamApiSeeder.createCustomer();
+        this.streamApiSeeder.createProduct();
+        this.streamApiSeeder.createOrder();
 
     }
 }
