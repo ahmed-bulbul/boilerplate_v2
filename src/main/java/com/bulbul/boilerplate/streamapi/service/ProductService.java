@@ -53,10 +53,14 @@ public class ProductService {
     List<ProductDto> getProductListFilerByCategoryAndApplyDiscount(){
         List<Product> products = productRepository.findAll()
                 .stream()
-                .filter(p -> p.getCategory().equalsIgnoreCase("Toys"))
-                .toList();
+                .filter(product -> product.getCategory().equals("Toys"))
+                .map(product -> {
+                    product.setPrice(product.getPrice() * 0.9); // Apply 10% discount
+                    return product;
+                })
+                .collect(Collectors.toList());
         return products.stream().map(p -> new ProductDto(
-                p.getName(),p.getCategory(),p.getPrice()-(p.getPrice()*0.1))).collect(Collectors.toList());
+                p.getName(),p.getCategory(),p.getPrice())).collect(Collectors.toList());
     }
 
 }

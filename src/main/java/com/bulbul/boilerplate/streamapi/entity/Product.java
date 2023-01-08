@@ -20,8 +20,7 @@ public class Product {
 
     private String name;
     private String category;
-    @With
-    private Double price;
+    @With private Double price;
 
     @ManyToMany(mappedBy = "products")
     @ToString.Exclude
@@ -41,4 +40,5 @@ public class Product {
         }
         return this.getId().hashCode();
     }
+
 }
