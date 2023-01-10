@@ -1,6 +1,8 @@
 package com.bulbul.boilerplate.common.constant;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class ApplicationConstant {
@@ -50,6 +52,9 @@ public class ApplicationConstant {
     public static final Boolean STATUS_FALSE = Boolean.FALSE;
     public static final String USER_NAME = "username";
     public static final String ENTITY_ID = "id";
+
+    public static Map<Integer, Set<Integer>> roleMap = new HashMap<>();
+    public static final Integer DEFAULT_PERMISSION_ID = 0;
     public static final String ACTIVE_FIELD = "isActive";
     public static final String TABLE_USER = "user";
     public static final String TABLE_ROLE = "role";
@@ -72,6 +77,16 @@ public class ApplicationConstant {
     /**
      * Value One
      */
+    public static final int VALUE_ONE = 1;
+    public static final int VALUE_TWENTY = 20;
+    public static final int VALUE_TWO = 2;
+    public static final int VALUE_FOUR = 4;
+    public static final int VALUE_ZERO = 0;
+    public static final int INT_ONE = 1;
+    public static final String UNDER_SCORE = "_";
+
+    public static final Integer SUPER_ADMIN_ROLE_ID = 1;
+
 
     /**
      * SYSTEM ROLE
@@ -91,4 +106,30 @@ public class ApplicationConstant {
     public static final String ROLE_SUPER_ADMIN_DESCRIPTION = "Role Super Admin";
     public static final String ROLE_USER_DESCRIPTION = "Role User";
     public static final String CREATED_BY_SYSTEM = "System";
+
+    public static final String[] WHITE_LIST_URLS = new String[] {
+            "/api/auth",
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/",
+            "/v3/api-docs/",
+            "/swagger-ui/",
+            "/api/erp/sync",
+            "/erp"
+    };
+    public static final String[] WHITE_LIST_WILDCARDS = new String[]{
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+    };
 }
