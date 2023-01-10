@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface PersonRepository extends JpaRepository<Person,Long> {
 
     PersonProjection findByAddressId(Long id);
+    Person findPersonByFirstName(String firstName);
 }
