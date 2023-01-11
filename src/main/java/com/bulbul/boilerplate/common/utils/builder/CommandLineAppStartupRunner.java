@@ -36,6 +36,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         this.streamApiSeeder.createCustomer();
         this.streamApiSeeder.createProduct();
         this.streamApiSeeder.createOrder();
+        this.streamApiSeeder.createPerson();
 
     }
 }

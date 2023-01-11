@@ -1,11 +1,16 @@
 package com.bulbul.boilerplate.streamapi.seed;
 
+import com.bulbul.boilerplate.projection.interfaceproj.entity.Address;
+import com.bulbul.boilerplate.projection.interfaceproj.entity.Person;
+import com.bulbul.boilerplate.projection.interfaceproj.repository.AddressRepository;
+import com.bulbul.boilerplate.projection.interfaceproj.repository.PersonRepository;
 import com.bulbul.boilerplate.streamapi.entity.Customer;
 import com.bulbul.boilerplate.streamapi.entity.Order;
 import com.bulbul.boilerplate.streamapi.entity.Product;
 import com.bulbul.boilerplate.streamapi.repository.CustomerRepository;
 import com.bulbul.boilerplate.streamapi.repository.OrderRepository;
 import com.bulbul.boilerplate.streamapi.repository.ProductRepository;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +28,9 @@ public  class StreamApiSeeder {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
+
+    private final PersonRepository personRepository;
+    private final AddressRepository addressRepository;
 
     public void createCustomer(){
 
@@ -83,6 +91,28 @@ public  class StreamApiSeeder {
             orderRepository.save(order);
         }
 
+    }
+
+    //create 50 person
+    public void createPerson(){
+        if(!personRepository.findAll().isEmpty()){
+            return;
+        }
+        for(int x=0;x<50;x++){
+            Random random = new Random();
+            String firstName = random.nextInt(99) +"name";
+            String lastName = Integer.toString(random.nextInt(99));
+            String city = random.nextInt(99) +"city";
+            Person person = new Person();
+            Address address = new Address();
+            address.setCity(city);
+            address.setZipCode(random.nextInt(99)+"");
+            person.setFirstName(firstName);
+            person.setLastName(lastName);
+            personRepository.save(person);
+            address.setPerson(person);
+            addressRepository.save(address);
+        }
     }
 
 

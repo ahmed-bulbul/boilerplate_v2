@@ -5,5 +5,6 @@ public interface PersonProjection {
     String getId();
     String getFirstName();
     String getAddressCity();
+    String getAddressZipCode();
 
 }

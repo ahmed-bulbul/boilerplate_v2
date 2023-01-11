@@ -24,6 +24,8 @@ public class Person {
 
     private String lastName;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private Address address;
 }

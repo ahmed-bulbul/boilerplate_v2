@@ -20,7 +20,7 @@ public class Product {
 
     private String name;
     private String category;
-    @With private Double price;
+    private Double price;
 
     @ManyToMany(mappedBy = "products")
     @ToString.Exclude

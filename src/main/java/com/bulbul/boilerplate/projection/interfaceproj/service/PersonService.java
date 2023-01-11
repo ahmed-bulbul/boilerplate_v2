@@ -31,6 +31,13 @@ public class PersonService {
     }
 
     private PersonResponseDto convertToResponseDto(Optional<Person> person) {
-        return null;
+        PersonProjection personProjection = personRepository.findPersonsById(person.orElseThrow().getId());
+        PersonResponseDto p = new PersonResponseDto();
+        p.setId(person.get().getId());
+        p.setFirstName(person.get().getFirstName());
+        p.setLastName(person.get().getLastName());
+        p.setCity(personProjection.getAddressCity());
+        p.setZip(personProjection.getAddressZipCode());
+        return p;
     }
 }
