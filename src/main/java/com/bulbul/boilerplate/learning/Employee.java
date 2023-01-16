@@ -1,4 +1,4 @@
-package com.bulbul.boilerplate;
+package com.bulbul.boilerplate.learning;
 
 import java.util.List;
 

@@ -3,7 +3,10 @@ package com.bulbul.boilerplate.common.utils;
 
 import com.bulbul.boilerplate.common.authentication.security.services.UserDetailsImpl;
 import com.bulbul.boilerplate.common.constant.ApplicationConstant;
+import com.bulbul.boilerplate.common.constant.ErrorId;
+import com.bulbul.boilerplate.common.exception.ApplicationServerException;
 import com.bulbul.boilerplate.common.generic.payload.response.PageData;
+import com.bulbul.boilerplate.common.loader.SubModuleJsonLoader;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -14,6 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
 import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
@@ -87,38 +92,38 @@ public class Helper {
         return this.request.getRequestURI().substring(contextPath.length());
     }
 
-//    public Long getSubModuleItemId() {
-//
-//        Long subModuleId = getSubModuleItemIdOrZero();
-//
-//        if (subModuleId == 0L) {
-//            LOGGER.error("Sub-module item id id could not be extracted");
-//            throw ApplicationServerException.badRequest(ErrorId.SUBMODULE_ITEM_ID_REQUIRED);
-//        }
-//
-//        return subModuleId;
-//    }
+    public Long getSubModuleItemId() {
 
-//    public Long getSubModuleItemIdOrZero() {
-//        String path = getRequestUri();
-//        PathMatcher pathMatcher = new AntPathMatcher();
-//
-//        Long subModuleId = 0L;
-//        char[] charPath = path.toCharArray();
-//        StringBuilder pathBuilder = new StringBuilder(path);
-//
-//        if (charPath[charPath.length - 1] == ApplicationConstant.SLASH_CHAR) {
-//            pathBuilder.deleteCharAt(path.length() - 1);
-//        }
-//
-//        for (Map.Entry<String, Long> api: SubModuleJsonLoader.SUB_MODULE_APIS.entrySet()) {
-//            if (pathMatcher.match(api.getKey(), pathBuilder.toString())) {
-//                subModuleId = (Long) api.getValue();
-//                break;
-//            }
-//        }
-//        return subModuleId;
-//    }
+        Long subModuleId = getSubModuleItemIdOrZero();
+
+        if (subModuleId == 0L) {
+            LOGGER.error("Sub-module item id id could not be extracted");
+            throw ApplicationServerException.badRequest(ErrorId.SUBMODULE_ITEM_ID_REQUIRED);
+        }
+
+        return subModuleId;
+    }
+
+    public Long getSubModuleItemIdOrZero() {
+        String path = getRequestUri();
+        PathMatcher pathMatcher = new AntPathMatcher();
+
+        Long subModuleId = 0L;
+        char[] charPath = path.toCharArray();
+        StringBuilder pathBuilder = new StringBuilder(path);
+
+        if (charPath[charPath.length - 1] == ApplicationConstant.SLASH_CHAR) {
+            pathBuilder.deleteCharAt(path.length() - 1);
+        }
+
+        for (Map.Entry<String, Long> api: SubModuleJsonLoader.SUB_MODULE_APIS.entrySet()) {
+            if (pathMatcher.match(api.getKey(), pathBuilder.toString())) {
+                subModuleId = (Long) api.getValue();
+                break;
+            }
+        }
+        return subModuleId;
+    }
 
     public static String createDynamicCode(String errorCode, List<String> placeHolders) {
         StringBuilder builder = new StringBuilder(errorCode);
