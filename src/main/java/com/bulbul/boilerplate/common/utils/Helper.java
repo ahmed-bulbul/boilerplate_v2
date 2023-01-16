@@ -3,12 +3,8 @@ package com.bulbul.boilerplate.common.utils;
 
 import com.bulbul.boilerplate.common.authentication.security.services.UserDetailsImpl;
 import com.bulbul.boilerplate.common.constant.ApplicationConstant;
-import com.bulbul.boilerplate.common.constant.ErrorId;
-import com.bulbul.boilerplate.common.exception.ApplicationServerException;
 import com.bulbul.boilerplate.common.generic.payload.response.PageData;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.util.PathMatcher;
 import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
@@ -59,7 +53,7 @@ public class Helper {
 
     public static String convertSnakeToHrf(String unreadableString) {
         return Arrays.stream(unreadableString.split(UNDER_SCORE)).map(strItem ->
-                        String.valueOf(strItem.charAt(0)).toUpperCase().concat(strItem.substring(1).toLowerCase()))
+                String.valueOf(strItem.charAt(0)).toUpperCase().concat(strItem.substring(1).toLowerCase()))
                 .collect(Collectors.joining(SPACE));
     }
 
@@ -67,7 +61,6 @@ public class Helper {
      * This method will prepare Preview Model  for PageData
      * @param data of Collection {@link  Collections}
      * @param pageable          {@link   Pageable}
-     * @return                  {@link PageData  }
      */
     public static <T> PageData buildCustomPagedData(List<T> data, Pageable pageable) {
         List<T> model = new ArrayList<>();
@@ -94,26 +87,26 @@ public class Helper {
         return this.request.getRequestURI().substring(contextPath.length());
     }
 
-    public Long getSubModuleItemId() {
+//    public Long getSubModuleItemId() {
+//
+//        Long subModuleId = getSubModuleItemIdOrZero();
+//
+//        if (subModuleId == 0L) {
+//            LOGGER.error("Sub-module item id id could not be extracted");
+//            throw ApplicationServerException.badRequest(ErrorId.SUBMODULE_ITEM_ID_REQUIRED);
+//        }
+//
+//        return subModuleId;
+//    }
 
-        Long subModuleId = getSubModuleItemIdOrZero();
-
-        if (subModuleId == 0L) {
-            LOGGER.error("Sub-module item id id could not be extracted");
-            throw ApplicationServerException.badRequest(ErrorId.SUBMODULE_ITEM_ID_REQUIRED);
-        }
-
-        return subModuleId;
-    }
-
-    public Long getSubModuleItemIdOrZero() {
-        String path = getRequestUri();
-        PathMatcher pathMatcher = new AntPathMatcher();
-
-        Long subModuleId = 0L;
-        char[] charPath = path.toCharArray();
-        StringBuilder pathBuilder = new StringBuilder(path);
-
+//    public Long getSubModuleItemIdOrZero() {
+//        String path = getRequestUri();
+//        PathMatcher pathMatcher = new AntPathMatcher();
+//
+//        Long subModuleId = 0L;
+//        char[] charPath = path.toCharArray();
+//        StringBuilder pathBuilder = new StringBuilder(path);
+//
 //        if (charPath[charPath.length - 1] == ApplicationConstant.SLASH_CHAR) {
 //            pathBuilder.deleteCharAt(path.length() - 1);
 //        }
@@ -124,8 +117,8 @@ public class Helper {
 //                break;
 //            }
 //        }
-        return subModuleId;
-    }
+//        return subModuleId;
+//    }
 
     public static String createDynamicCode(String errorCode, List<String> placeHolders) {
         StringBuilder builder = new StringBuilder(errorCode);
